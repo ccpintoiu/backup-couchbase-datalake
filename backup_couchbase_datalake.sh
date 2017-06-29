@@ -65,7 +65,8 @@ files_to_delete=`expr $no_files_in_dir - $tokeep - 2`
 echo "files to delete" $files_to_delete
 tail_=`expr $no_files_in_dir - 2`
 if [ $files_to_delete -gt 0 ]; then
- torm=`/opt/datalake-1.4/bin/dl -ls $dl/$dl_folder | tail -n $tail_ | head -n $files_to_delete | awk '{print $8}' `
+ #torm=`/opt/datalake-1.4/bin/dl -ls $dl/$dl_folder | tail -n $tail_ | head -n $files_to_delete | awk '{print $8}' `
+ torm=`/opt/datalake-1.4/bin/dl -ls -R $dl/$dl_folder | tail -n $tail_ | sort -k6,7 | head -n $files_to_delete | awk '{print $8}' `
  for item in $torm
  do 
  	#echo $item " remove current item"
